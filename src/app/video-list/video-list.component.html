@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="let video of videos"
       (click)="selectedVideo = video"
-      [class.active]="selectedVideo?.id === video.id">{{ video?.title }} - {{ video?.author }}
+      [class.active]="selectedVideo?.id === video.id"><app-video-preview [video]="video"></app-video-preview>>
   </li>
 </ul>
