@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 import { Video } from './app.types';
 
@@ -15,6 +16,7 @@ export class VideoLoaderService {
 
   loadVideos(): Observable<Video[]> {
     return this.http
-      .get<Video[]>(API_URL + '/videos');
+      .get<Video[]>(API_URL + '/videos')
+      .pipe(shareReplay());
   }
 }
