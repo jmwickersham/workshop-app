@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 // import { videos } from './sample-data';
-import { Video } from './app.types';
+import { Video, Filter } from './app.types';
 import { VideoLoaderService } from './video-loader.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class AppComponent {
   // videos: Video[] = videos;
   videos: Observable<Video[]>;
   selectedVideo: Video;
+  filter: Filter;
 
   constructor(service: VideoLoaderService) {
     this.videos = service.loadVideos();

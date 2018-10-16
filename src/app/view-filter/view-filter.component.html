@@ -1,3 +1,47 @@
-<p>
-  view-filter works!
-</p>
+<form [formGroup]="filterForm">
+  <div>
+    Region
+    <div>
+      <input formControlName="region" type="radio" value="All"> All
+    </div>
+    <div>
+      <input formControlName="region" type="radio" value="North America"> North America
+    </div>
+    <div>
+      <input formControlName="region" type="radio" value="Europe"> Europe
+    </div>
+    <div>
+      <input formControlName="region" type="radio" value="Asia"> Asia
+    </div>
+  </div>
+
+  <div>
+    Date Range
+    <div>
+      From <input type="date" formControlName="minDate">
+    </div>
+    <div>
+      To <input type="date" formControlName="maxDate">
+    </div>
+  </div>
+
+  <div>
+    Age Range
+    <div>
+      <input type="checkbox" formControlName="minor"> Under 18
+    </div>
+    <div>
+      <input type="checkbox" formControlName="adult"> 18 - 40
+    </div>
+    <div>
+      <input type="checkbox" formControlName="middleAge"> 40 - 60
+    </div>
+    <div>
+      <input type="checkbox" formControlName="senior"> 60+
+    </div>
+  </div>
+</form>
+
+<pre>
+  {{ filterForm.value | json }}
+</pre>

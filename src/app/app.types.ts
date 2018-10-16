@@ -10,3 +10,13 @@ export interface Video {
   id: string;
   viewDetails: VideoDetails[];
 }
+
+export interface Filter {
+  region: string;
+  minDate: string;
+  maxDate: string;
+  minor: boolean;
+  adult: boolean;
+  middleAge: boolean;
+  senior: boolean;
+}
