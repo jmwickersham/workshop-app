@@ -22,13 +22,13 @@ export class DashboardComponent {
   constructor(service: VideoLoaderService, private ar: ActivatedRoute, private router: Router) {
     this.videos = service.loadVideos();
     this.selectedVideo = this.ar.queryParams.pipe(
-      map(qp => qp[videoIdQueryParam]),
-      switchMap((id: string) => this.videos.pipe(
-        map(vl => vl.find(v => v.id === id))
-      )));
+        map(qp => qp[videoIdQueryParam]),
+        switchMap((id: string) => this.videos.pipe(
+          map(vl => vl.find(v => v.id === id)))
+        ));
   }
 
   setSelectedVideo(v: Video) {
-    this.router.navigate([], { queryParams: { videoIdQueryParam: v.id }, queryParamsHandling: 'merge' });
+    this.router.navigate([], { queryParams: { [ videoIdQueryParam ]: v.id }, queryParamsHandling: 'merge' });
   }
 }
