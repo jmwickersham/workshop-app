@@ -1,10 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 // import { videos } from './sample-data';
 import { Video } from './app.types';
-
-const API_URL = 'https://api.angularbootcamp.com';
+import { VideoLoaderService } from './video-loader.service';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +14,10 @@ export class AppComponent {
   title = 'workshop-app';
 
   // videos: Video[] = videos;
-  videos: Video[] = [];
+  videos: Observable<Video[]>;
   selectedVideo: Video;
 
-  constructor(http: HttpClient) {
-    http
-      .get<Video[]>(API_URL + '/videos')
-      .subscribe(videoResult => this.videos = videoResult);
+  constructor(service: VideoLoaderService) {
+    this.videos = service.loadVideos();
   }
 }

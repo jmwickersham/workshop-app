@@ -9,7 +9,7 @@
   <app-view-breakdown></app-view-breakdown>
   <app-video-embedder [selectedVideo]="selectedVideo"></app-video-embedder>
   <app-view-filter></app-view-filter>
-  <app-video-list [videos]="videos"
+  <app-video-list [videos]="videos | async"
                   [selectedVideo]="selectedVideo"
                   (selection)="selectedVideo = $event">
   </app-video-list>
