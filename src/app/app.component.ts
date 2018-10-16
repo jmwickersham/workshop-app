@@ -12,4 +12,5 @@ export class AppComponent {
   title = 'workshop-app';
 
   videos: Video[] = videos;
+  selectedVideo: Video;
 }
