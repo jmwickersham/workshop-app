@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatCardModule, MatListModule, MatRadioModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -45,7 +45,9 @@ import { AppState, filterReducer, selectedVideoIdReducer, videoListReducer } fro
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
