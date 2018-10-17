@@ -1,8 +1,8 @@
 <div class="grid">
-  <app-view-breakdown [filter]="filter" [views]="selectedVideo?.viewDetails">
-  </app-view-breakdown>
-  <app-video-embedder [selectedVideo]="selectedVideo"></app-video-embedder>
-  <app-view-filter (filterChanged)="filter = $event"></app-view-filter>
-  <app-video-list [videos]="videos | async" [selectedVideo]="selectedVideo" (selection)="selectedVideo = $event">
-  </app-video-list>
-</div>
+    <app-video-list [videos]="videos | async"
+                    [selectedVideo]="selectedVideo | async"
+                    (selection)="setSelectedVideo($event)"></app-video-list>
+    <app-view-filter (filterChanged)="filter = $event"></app-view-filter>
+    <app-video-embedder [selectedVideo]="selectedVideo | async"></app-video-embedder>
+    <app-view-breakdown [filter]="filter" [views]="(selectedVideo | async)?.viewDetails"></app-view-breakdown>
+  </div>
