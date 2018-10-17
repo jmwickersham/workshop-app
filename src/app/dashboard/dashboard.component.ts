@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, switchMap} from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+
+import { VideoLoaderService } from '../video-loader.service';
+import { StateService } from '../state.service';
 
 import { Video, Filter } from '../app.types';
-import { VideoLoaderService } from '../video-loader.service';
+import { AppState, VideoListArrived, SelectVideo, FilterChange } from '../state';
 
 const videoIdQueryParam = 'videoId';
 
@@ -15,20 +18,36 @@ const videoIdQueryParam = 'videoId';
 })
 export class DashboardComponent {
 
-  videos: Observable<Video[]>;
-  selectedVideo: Observable<Video>;
-  filter: Filter;
-
-  constructor(service: VideoLoaderService, private ar: ActivatedRoute, private router: Router) {
+  constructor(
+    service: VideoLoaderService,
+    private ar: ActivatedRoute,
+    private router: Router,
+    private store: Store<AppState>,
+    private stateManager: StateService
+  ) {
+    service.loadVideos()
+      .pipe(map(vl => new VideoListArrived(vl)))
+      .subscribe(a => store.dispatch(a));
+    this.ar.queryParams.pipe(
+      map(qp => qp[videoIdQueryParam]),
+      map(id => new SelectVideo(id))
+    )
+    .subscribe(a => store.dispatch(a));
     this.videos = service.loadVideos();
-    this.selectedVideo = this.ar.queryParams.pipe(
-        map(qp => qp[videoIdQueryParam]),
-        switchMap((id: string) => this.videos.pipe(
-          map(vl => vl.find(v => v.id === id)))
-        ));
   }
+  // videos: Observable<Video[]>;
+  // selectedVideo: Observable<Video>;
+  // filter: Filter;
+
+  videos = this.stateManager.videos;
+  selectedVideo = this.stateManager.selectedVideo;
+  filteredViews = this.stateManager.filteredViews;
 
   setSelectedVideo(v: Video) {
     this.router.navigate([], { queryParams: { [ videoIdQueryParam ]: v.id }, queryParamsHandling: 'merge' });
+  }
+
+  setFilter(f: Filter) {
+    this.store.dispatch(new FilterChange(f));
   }
 }

@@ -1,17 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { VideoListComponent } from './video-list/video-list.component';
-import { VideoEmbedderComponent } from './video-embedder/video-embedder.component';
-import { ViewBreakdownComponent } from './view-breakdown/view-breakdown.component';
 import { ViewFilterComponent } from './view-filter/view-filter.component';
 import { VideoPreviewComponent } from './video-preview/video-preview.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { VideoEmbedderComponent } from './video-embedder/video-embedder.component';
+import { ViewBreakdownComponent } from './view-breakdown/view-breakdown.component';
+
+import { AppState, filterReducer, selectedVideoIdReducer, videoListReducer } from './state';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot<AppState> ({
+      filter: filterReducer,
+      selectedVideoId: selectedVideoIdReducer,
+      videoList: videoListReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

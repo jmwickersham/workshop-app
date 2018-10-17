@@ -17,9 +17,9 @@ export class ViewFilterComponent implements OnInit {
 
   constructor(fb: FormBuilder) {
     this.filterForm = fb.group({
-      region: ['All'],
-      minDate: ['1995-01-01'],
-      maxDate: ['2019-01-01'],
+      region: 'All',
+      minDate: '1995-01-01',
+      maxDate: '2019-01-01',
       minor: true,
       adult: true,
       middleAge: true,
