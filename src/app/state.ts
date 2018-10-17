@@ -64,7 +64,7 @@ export const defaultFilter: Filter = {
   senior: true
 };
 
-export function filterReducer(prevFilter: Filter, action: Action) {
+export function filterReducer(prevFilter: Filter = defaultFilter, action: Action) {
   switch (action.type) {
     case FILTER_CHANGE:
       return (action as FilterChange).filter;
