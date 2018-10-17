@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
 
-import { VideoLoaderService } from '../video-loader.service';
 import { StateService } from '../state.service';
 
 import { Video, Filter } from '../app.types';
 import { AppState, VideoListArrived, SelectVideo, FilterChange } from '../state';
 
-const videoIdQueryParam = 'videoId';
+export const videoIdQueryParam = 'videoId';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,22 +17,10 @@ const videoIdQueryParam = 'videoId';
 export class DashboardComponent {
 
   constructor(
-    service: VideoLoaderService,
-    private ar: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>,
     private stateManager: StateService
-  ) {
-    service.loadVideos()
-      .pipe(map(vl => new VideoListArrived(vl)))
-      .subscribe(a => store.dispatch(a));
-    this.ar.queryParams.pipe(
-      map(qp => qp[videoIdQueryParam]),
-      map(id => new SelectVideo(id))
-    )
-    .subscribe(a => store.dispatch(a));
-    this.videos = service.loadVideos();
-  }
+  ) { }
   // videos: Observable<Video[]>;
   // selectedVideo: Observable<Video>;
   // filter: Filter;
