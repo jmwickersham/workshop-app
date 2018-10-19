@@ -1,52 +1,49 @@
 <form [formGroup]="filterForm">
-  <!-- <div>
-    Region
-    <div>
-      <input formControlName="region" type="radio" value="All"> All
-    </div>
-    <div>
-      <input formControlName="region" type="radio" value="North America"> North America
-    </div>
-    <div>
-      <input formControlName="region" type="radio" value="Europe"> Europe
-    </div>
-    <div>
-      <input formControlName="region" type="radio" value="Asia"> Asia
-    </div>
-  </div> -->
-  <mat-radio-group class="example-radio-group">
-    Region
-    <mat-radio-button formControlName="region" value="All">All</mat-radio-button>
-    <mat-radio-button formControlName="region" value="North America">North America</mat-radio-button>
-    <mat-radio-button formControlName="region" value="Europe">Europe</mat-radio-button>
-    <mat-radio-button formControlName="region" value="Asia">Asia</mat-radio-button>
+  <mat-radio-group formControlName="region" class="example-radio-group">
+    <strong>Region</strong>
+    <mat-radio-button value="All">All</mat-radio-button>
+    <mat-radio-button value="North America">North America</mat-radio-button>
+    <mat-radio-button value="Europe">Europe</mat-radio-button>
+    <mat-radio-button value="Asia">Asia</mat-radio-button>
   </mat-radio-group>
-  <div>
-    Date Range
+  <!-- <div>
+    <strong>Date Range</strong>
     <div>
       From <input type="date" formControlName="minDate">
     </div>
     <div>
       To <input type="date" formControlName="maxDate">
     </div>
-  </div>
-
+  </div> -->
   <div>
-    Age Range
+    <strong>Date Range</strong>
     <div>
-      <!-- <input type="checkbox" formControlName="minor"> Under 18 -->
+      <mat-form-field>
+        <input matInput formControlName="minDate" [matDatepicker]="minPicker" placeholder="From">
+        <mat-datepicker-toggle matSuffix [for]="minPicker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi="true" #minPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="maxDate" [matDatepicker]="maxPicker" placeholder="To">
+        <mat-datepicker-toggle matSuffix [for]="maxPicker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi="true" #maxPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <strong>Age Range</strong>
+    <div>
       <mat-checkbox formControlName="minor">Under 18</mat-checkbox>
     </div>
     <div>
-      <!-- <input type="checkbox" formControlName="adult"> 18 - 40 -->
       <mat-checkbox formControlName="adult">18 - 40</mat-checkbox>
     </div>
     <div>
-      <!-- <input type="checkbox" formControlName="middleAge"> 40 - 60 -->
       <mat-checkbox formControlName="middleAge">40 - 60</mat-checkbox>
     </div>
     <div>
-      <!-- <input type="checkbox" formControlName="senior"> 60+ -->
       <mat-checkbox formControlName="senior">60+</mat-checkbox>
     </div>
   </div>
